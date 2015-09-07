@@ -1,0 +1,35 @@
+<ng-include src="'app/partials/signedInHeader.html'"></ng-include>
+
+<button class="btn btn-primary pull-right" ng-click="vm.newAttendeeModal()">
+    Send Invite</button>
+<h3 class="col-sm-offset-2" >Who's Going</h3>
+
+<div class="col-sm-offset-2">
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th>Name</th>
+                <th>Status</th>
+                <th>Comment</th>
+                <th>Options</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr ng-repeat="(i, attendee) in vm.attendees">
+                <td>
+                    <span ng-repeat="(j, user) in attendee.users">
+                        <img ng-src="{{user.avatar ? user.avatar : '/images/default-avatar.png'}}"
+                             class="avatar" tooltip-placement="top" tooltip="{{user.userName}}">
+                    </span>
+                    {{attendee.accountName}}
+                </td>
+                <td>
+                    <attending-status status="attendee.status"></attending-status>
+                </td>
+                <td>{{attendee.comment}}</td>
+                <td>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</div>

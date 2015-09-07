@@ -1,0 +1,24 @@
+{
+  "name": "Steelfig",
+  "version": "0.1",
+  "authors": [
+    "David Symons <symons@aospace.com>"
+  ],
+  "main": "src/index.html",
+  "license": "MIT",
+  "homepage": "http://www.steelfig.com",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "angular": "~1.4.3",
+    "angular-ui-router": "~0.2.15",
+    "bootstrap": "~3.3.5",
+    "font-awesome": "~4.4.0",
+    "angular-bootstrap": "~0.13.1"
+  }
+}

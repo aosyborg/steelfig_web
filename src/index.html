@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html ng-app="app" ng-controller="AppCtrl as vm">
+<head>
+    <meta name="fragment" content="!">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+    <title>Steelfig</title>
+
+    <!-- This gets replaced by a CDN link with gulp -->
+    <link href="../bower_components/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="../bower_components/font-awesome/css/font-awesome.min.css" rel="stylesheet">
+
+    <link rel="stylesheet" href="css/main.css">
+    <link href="http://fonts.googleapis.com/css?family=Roboto:100,100italic,300,300italic,400,400italic,500,500italic,700,700italic,900,900italic&subset=latin,cyrillic-ext,greek-ext,greek,vietnamese,latin-ext,cyrillic" rel="stylesheet" type="text/css">
+</head>
+<body>
+
+    <div id="app-container">
+        <div ui-view></div>
+    </div>
+
+    <!-- These get replaced by a CDN link with gulp -->
+    <script src="../bower_components/angular/angular.js"></script>
+    <script src="../bower_components/angular-ui-router/release/angular-ui-router.js"></script>
+    <script src="../bower_components/angular-bootstrap/ui-bootstrap.js"></script>
+    <script src="//apis.google.com/js/client.js"></script>
+    <script src="//angular-ui.github.io/bootstrap/ui-bootstrap-tpls-0.11.0.js"></script>
+
+    <!-- inject:js -->
+    <script src="/src/app/components/steelfig-api/api.module.js"></script>
+    <script src="/src/app/components/steelfig-api/api.service.js"></script>
+    <script src="/src/app/components/google-api/api.module.js"></script>
+    <script src="/src/app/components/google-api/api.service.js"></script>
+    <script src="/src/app/app.js"></script>
+    <script src="/src/app/login/login.controller.js"></script>
+    <script src="/src/app/landing/landing.controller.js"></script>
+    <script src="/src/app/app.routes.js"></script>
+    <script src="/src/app/app.controller.js"></script>
+    <script src="/build/partials/app/landing/landing.js"></script>
+    <script src="/build/partials/app/login/login.js"></script>
+    <!-- endinject -->
+</body>
+</html>

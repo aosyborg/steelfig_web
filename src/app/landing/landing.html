@@ -1,0 +1,49 @@
+<ng-include src="'app/partials/signedInHeader.html'"></ng-include>
+
+<h3>Welcome</h3>
+
+<div ng-controller="LandingCtrl" class="main">
+    <div class="row widget">
+        <div class="wbody">
+            <div class="event-when">
+                <strong>
+                    <i class="fa fa-calendar"></i> When:
+                </strong>
+                TBA - Please keep the schedule up-to-date!
+            </div>
+
+            <div class="event-where">
+                <strong>
+                    <i class="fa fa-map-marker"></i>&nbsp; Where:
+                </strong>
+                TBA
+            </div>
+
+            <div class="event-status">
+                <strong>
+                    <i class="fa fa-mail-reply"></i> My Response:
+                </strong>
+                Change me
+                <i class="glyphicon glyphicon-pencil cursor-pointer"
+                   data-toggle="modal"
+                   data-target="#change-response-modal"></i>
+            </div>
+        </div>
+    </div>
+
+    <div class="row widget">
+        <div class="whead">
+            Announcements
+        </div>
+        <div class="wbody">
+            Welcome to Steelfig! Please:
+            <ul>
+                <li>Keep your response updated! Click the pencil to change it.</li>
+                <li>Check whose going and send additional invites to anyone I may have
+                missed.</li>
+                <li>Input your available times for a get together.</li>
+                <li>Start adding items to your wishlist.</li>
+            </ul>
+        </div>
+    </div>
+</div>

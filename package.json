@@ -1,0 +1,35 @@
+{
+  "name": "Steelfig",
+  "version": "0.1.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "start": "./node_modules/http-server/bin/http-server . -a 0.0.0.0 -p 8000",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/aosyborg/steelfig_web.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/aosyborg/steelfig_web/issues"
+  },
+  "dependencies": {
+    "browser-sync": "^2.8.2",
+    "connect-modrewrite": "^0.8.2",
+    "del": "^1.2.0",
+    "gulp": "^3.9.0",
+    "gulp-angular-filesort": "^1.1.1",
+    "gulp-concat": "^2.6.0",
+    "gulp-inject": "^1.5.0",
+    "gulp-jshint": "^1.11.2",
+    "gulp-load-plugins": "^1.0.0-rc.1",
+    "gulp-minify-html": "^1.0.4",
+    "gulp-ng-html2js": "^0.2.0",
+    "gulp-replace": "^0.5.3",
+    "karma": "^0.13.8",
+    "stream-series": "^0.1.1"
+  }
+}
