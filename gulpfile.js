@@ -17,7 +17,7 @@ var gulp = require('gulp'),
     },
     srcPaths = {
         appJs: 'src/app/**/!(*.spec).js',
-        templates: 'src/app/**/*.html',
+        templates: 'src/app*/**/*.html',
         images: 'src/images/*',
         styles: 'src/css/*'
     },
@@ -29,7 +29,7 @@ var gulp = require('gulp'),
 
 gulp.task('default', ['build:debug']);
 gulp.task('build:debug', ['jshint', 'templates'], buildDebug);
-gulp.task('build:dist', ['jshint', 'minjs', 'copyassets'], buildDist);
+gulp.task('build:dist', [ 'minjs', 'copyassets'], buildDist);
 
 gulp.task('jshint', jshint);
 gulp.task('templates', ['clean:templates'], templates);
@@ -70,7 +70,6 @@ function jshint () {
 function minjs () {
     return getJsSources()
         .pipe(plugins.concat('app.js'))
-        .pipe(plugins.uglify())
         .pipe(gulp.dest(destPaths.dist + '/js'));
 }
 
@@ -88,8 +87,8 @@ function templates () {
 }
 
 function copyAssets () {
-    return gulp.src('src/assets/**/*')
-        .pipe(gulp.dest(destPaths.dist));
+    gulp.src('src/images/*').pipe(gulp.dest(destPaths.dist + '/images'));
+    gulp.src('src/css/*').pipe(gulp.dest(destPaths.dist + '/css'));
 }
 
 function buildDebug () {
@@ -116,11 +115,11 @@ function buildDist () {
         .pipe(plugins.replace('../bower_components/angular-moment/angular-moment.js', cdnFiles.angularMoment))
         .pipe(plugins.replace('../bower_components/bootstrap/dist/css/bootstrap.min.css', cdnFiles.bootstrap))
         .pipe(plugins.replace('../bower_components/font-awesome/css/font-awesome.min.css', cdnFiles.fontawesome))
-        .pipe(plugins.minifyHtml({
-            empty: true,
-            spare: true,
-            quotes: true
-        }))
+        //.pipe(plugins.minifyHtml({
+        //    empty: true,
+        //    spare: true,
+        //    quotes: true
+        //}))
         .pipe(gulp.dest(destPaths.dist));
 }
 
