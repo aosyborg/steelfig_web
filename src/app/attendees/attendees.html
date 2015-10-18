@@ -1,5 +1,11 @@
 <ng-include src="'app/partials/signedInHeader.html'"></ng-include>
 
+<div ng-repeat="alert in vm.alerts">
+    <div class="col-sm-offset-2 alert alert-{{alert.type}}">
+        {{alert.msg}}
+    </div>
+</div>
+
 <button class="btn btn-primary pull-right" ng-click="vm.newAttendeeModal()">
     Send Invite</button>
 <h3 class="col-sm-offset-2" >Who's Going</h3>
@@ -28,6 +34,14 @@
                 </td>
                 <td>{{attendee.comment}}</td>
                 <td>
+                    <span ng-if="vm.isUserInGroup(attendee) && attendee.users.length > 1">
+                        <i class="fa fa-unlink" ng-click="vm.unlink()"></i>
+                    </span>
+                    <span ng-if="!vm.isUserInGroup(attendee)">
+                        <i class="fa fa-link" ng-click="vm.link(attendee.accountId)"></i>
+                        <i class="fa fa-envelope" ng-click="vm.sendMessage(attendee.accountId)"></i>
+                        <i class="fa fa-list" ng-click="vm.showList(attendee.accountId)"></i>
+                    </span>
                 </td>
             </tr>
         </tbody>

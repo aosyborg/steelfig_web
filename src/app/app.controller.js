@@ -5,8 +5,10 @@
         .module('app')
         .controller('AppCtrl', AppController);
 
-    AppController.$inject = ['$scope', '$location', 'steelfigAuth', 'steelfigService'];
-    function AppController ($scope, $location, steelfigAuth, steelfigService) {
+    AppController.$inject = ['$scope', '$log', '$location', 'steelfigAuth', 'steelfigService'];
+    function AppController ($scope, $log, $location, steelfigAuth, steelfigService) {
+        $scope.$log = $log;
+
         // Force login
         if (!steelfigAuth.loadToken()) {
             return $location.path('login');

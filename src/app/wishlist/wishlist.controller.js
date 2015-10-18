@@ -5,11 +5,50 @@
         .module('app')
         .controller('WishlistCtrl', WishlistController);
 
-    WishlistController.$inject = ['$scope'];
-    function WishlistController ($scope) {
+    WishlistController.$inject = ['$scope', '$modal', 'steelfigWishlistService'];
+    function WishlistController ($scope, $modal, steelfigWishlistService) {
+        var vm = this;
+        vm.items = [];
+        vm.edit = editItem;
+        vm.delete = deleteItem;
+
         activate();
 
         function activate () {
+            steelfigWishlistService.fetch()
+                .then(function (items) {
+                    vm.items = items;
+                });
+        }
+
+        function editItem (item) {
+            $modal.open({
+                templateUrl: 'app/wishlist/edit-item.modal.html',
+                controller: 'EditItemModalCtrl as vm',
+                resolve: {
+                    item: function () {
+                        return item || {};
+                    }
+                }
+            }).result
+            .then(function (items) {
+                if (!items) {
+                    return;
+                }
+
+                vm.items = items;
+            });
+        }
+
+        function deleteItem (item) {
+            steelfigWishlistService.delete(item)
+                .then(function () {
+                    angular.forEach(vm.items, function (n, i) {
+                        if (n.id == item.id) {
+                            vm.items.splice(i, 1);
+                        }
+                    });
+                });
         }
     }
 })();

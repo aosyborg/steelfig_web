@@ -12,8 +12,6 @@
         activate();
 
         function activate () {
-            document.getElementById('app-container').style
-                .background = '#ffffff url("images/login.jpg") no-repeat center top';
         }
 
         function signin() {

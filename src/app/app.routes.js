@@ -31,10 +31,7 @@
                 url: '/attendees',
                 controller: 'AttendeesCtrl',
                 controllerAs: 'vm',
-                templateUrl: 'app/attendees/attendees.html',
-                resolve: {
-                    attendeesPrepService: attendeesPrepService
-                }
+                templateUrl: 'app/attendees/attendees.html'
             })
             .state('messages', {
                 url: '/messages',
@@ -50,10 +47,5 @@
             });
 
         $urlRouterProvider.otherwise('/');
-    }
-
-    attendeesPrepService.$inject = ['steelfigService'];
-    function attendeesPrepService (steelfigService) {
-        return steelfigService.fetchAttendees();
     }
 })();

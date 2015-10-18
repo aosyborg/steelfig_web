@@ -11,12 +11,17 @@
 
         provider.$get = fetchService;
 
-        fetchService.$inject = ['$q', '$location', '$http', 'steelfigAuth'];
-        function fetchService ($q, $location, $http, steelfigAuth) {
+        fetchService.$inject = ['$q', '$location', '$http', 'steelfigAuth',
+            'steelfigEventService', 'steelfigWishlistService'];
+        function fetchService ($q, $location, $http, steelfigAuth,
+                steelfigEvent, steelfigWish) {
             return {
                 signin: signin,
                 fetchUser: user,
-                fetchAttendees: attendees
+                fetchAttendees: steelfigEvent.fetchAttendees,
+                unlinkAccount: unlinkAccount,
+                invite: steelfigEvent.invite,
+                fetchWishlist: steelfigWish.fetch
             };
 
             function signin (accessToken) {
@@ -47,36 +52,19 @@
                     });
             }
 
-            function attendees (reload) {
-                var eventId = localStorage.getItem('eventId');
-                if (!eventId) {
-                    throw new Error('eventId not set in storage!');
-                }
-
-                return $http.get(apiUrl + '/attendees/event/' + eventId)
-                    .then(function (response) {
-                        var users = response.data.attendees,
-                            rows = {};
-
-                        // Group users to accounts
-                        angular.forEach(users, function (user) {
-                            if (!rows[user.accountId]) {
-                                rows[user.accountId] = {
-                                    users: [user],
-                                    accountId: user.accountId,
-                                    accountName: user.accountName,
-                                    comment: user.comment,
-                                    status: user.status
-                                };
-                            } else {
-                                rows[user.accountId].users.push(user);
-                            }
-                        });
-
-                        return rows;
-                    });
+            function unlinkAccount () {
+                return $http.post(apiUrl + '/account/unlink', {eventId: getEventId()});
             }
         }
+    }
+
+    function getEventId () {
+        var eventId = localStorage.getItem('eventId');
+        if (!eventId) {
+            throw new Error('eventId not set in storage!');
+        }
+
+        return eventId;
     }
 
     function param (options) {
