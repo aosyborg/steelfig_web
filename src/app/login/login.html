@@ -1,9 +1,7 @@
 <ng-include src="'app/partials/signedOutHeader.html'"></ng-include>
 
-<div ng-controller="LoginCtrl">
-    <div id="login-box" ng-click="signin()">
-        <i class="fa fa-google fa-lg"></i>
-        <span>| Sign in with Google</span>
-    </div>
+<div id="login-box" ng-click="vm.signin()">
+    <i class="fa fa-google fa-lg"></i>
+    <span>| Sign in with Google</span>
 </div>
 

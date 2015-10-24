@@ -6,7 +6,7 @@
         .controller('AttendeesCtrl', AttendeesController);
 
     AttendeesController.$inject = ['$scope', '$modal', 'steelfigService'];
-    function AttendeesController ($scope, $modal, steelfigService) {
+    function AttendeesController ($scope, $modal, steelfig) {
         var vm = this;
         vm.alerts = [];
         vm.attendees = [];
@@ -17,7 +17,7 @@
         activate();
 
         function activate () {
-            steelfigService.fetchAttendees()
+            steelfig.attendee.fetch()
                 .then(function (attendees) {
                     vm.attendees = attendees;
                 });
@@ -50,7 +50,7 @@
         }
 
         function unlink () {
-            steelfigService.unlinkAccount()
+            steelfig.user.unlinkAccount()
                 .then(activate);
         }
     }

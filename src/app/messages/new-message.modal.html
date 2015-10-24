@@ -1,0 +1,36 @@
+<div class="modal-header">
+    <button type="button" class="close" ng-click="vm.cancel()">&times;</button>
+    <h4 class="modal-title">New Message</h4>
+</div>
+<div class="modal-body">
+    <form action="#" class="form-horizontal">
+        <div class="form-group required">
+            <label for="message-to" class="col-sm-2 control-label">To</label>
+            <div class="col-sm-10">
+                <select class="form-control" ng-model="message.to">
+                    <option value="">Select Attendee</option>
+                </select>
+            </div>
+        </div>
+        <div class="form-group required">
+            <label for="message-subject" class="col-sm-2 control-label">Subject</label>
+            <div class="col-sm-10">
+                <input type="text"
+                       class="form-control"
+                       ng-model="message.subject"
+                       placeholder="subject">
+            </div>
+        </div>
+        <div class="form-group required">
+            <label for="message-text" class="col-sm-2 control-label">Message</label>
+            <div class="col-sm-10">
+                <textarea class="form-control" rows="3" name="message"></textarea>
+            </div>
+        </div>
+    </form>
+</div>
+<div class="modal-footer">
+    <img src="/images/loading.gif"  ng-class="{loading: !vm.isLoading}">
+    <button type="button" class="btn btn-default" ng-click="vm.cancel()">Cancel</button>
+    <button type="button" class="btn btn-primary" ng-click="vm.send()">Send</button>
+</div>

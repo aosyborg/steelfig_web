@@ -6,7 +6,7 @@
         .controller('NewAttendeeModalCtrl', NewAttendeeModalCtrl);
 
     NewAttendeeModalCtrl.$inject = ['$modalInstance', 'steelfigService'];
-    function NewAttendeeModalCtrl ($modalInstance, steelfigService) {
+    function NewAttendeeModalCtrl ($modalInstance, steelfig) {
         var vm = this;
         vm.send = send;
         vm.cancel = cancel;
@@ -21,7 +21,7 @@
             vm.errors.email = false;
             vm.isLoading = true;
 
-            steelfigService.invite(invitation)
+            steelfig.attendee.invite(invitation)
                 .then(function (attendees) {
                     vm.isLoading = false;
                     $modalInstance.close(attendees);

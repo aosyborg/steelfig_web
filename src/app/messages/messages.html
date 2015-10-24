@@ -1,8 +1,29 @@
 <ng-include src="'app/partials/signedInHeader.html'"></ng-include>
 
-<button class="btn btn-primary pull-right" data-toggle="modal" data-target="#create-message-modal"> 
-    Create Message</button>
+<button class="btn btn-primary pull-right" ng-click="vm.new()">
+    New Message</button>
 <h3>My Messages</h3>
 
-<div ng-controller="AttendeesCtrl" class="main">
+<div class="col-sm-offset-2">
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th>Subject</th>
+                <th>Date</th>
+                <th>Options</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr ng-repeat="message in vm.messages.inbox" ng-class="{'bold': !message.read_at}">
+                <td>{{message.subject}}</td>
+                <td>{{message.created_at}}</td>
+                <td>
+                    <i class="fa fa-reply" ng-click="vm.reply(message)"></i>
+                    <i class="glyphicon glyphicon-trash"
+                       ng-click="vm.delete(message)"
+                       confirm="This cannot be undone!"></i>
+                </td>
+            </tr>
+        </tbody>
+    </table>
 </div>

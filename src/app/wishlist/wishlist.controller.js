@@ -5,8 +5,8 @@
         .module('app')
         .controller('WishlistCtrl', WishlistController);
 
-    WishlistController.$inject = ['$scope', '$modal', 'steelfigWishlistService'];
-    function WishlistController ($scope, $modal, steelfigWishlistService) {
+    WishlistController.$inject = ['$scope', '$modal', 'steelfigService'];
+    function WishlistController ($scope, $modal, steelfig) {
         var vm = this;
         vm.items = [];
         vm.edit = editItem;
@@ -15,7 +15,7 @@
         activate();
 
         function activate () {
-            steelfigWishlistService.fetch()
+            steelfig.wishlist.fetch()
                 .then(function (items) {
                     vm.items = items;
                 });
@@ -41,7 +41,7 @@
         }
 
         function deleteItem (item) {
-            steelfigWishlistService.delete(item)
+            steelfig.wishlist.delete(item)
                 .then(function () {
                     angular.forEach(vm.items, function (n, i) {
                         if (n.id == item.id) {

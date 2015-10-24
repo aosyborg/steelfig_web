@@ -3,9 +3,9 @@
 
     angular
         .module('steelfig')
-        .provider('steelfigEventService', SteelfigEvent);
+        .provider('steelfigAttendeeService', SteelfigAttendee);
 
-    function SteelfigEvent () {
+    function SteelfigAttendee () {
         var provider = this,
             apiUrl = 'http://api.steelfig.com:8000/v1';
 
@@ -14,11 +14,11 @@
         fetchService.$inject = ['$http'];
         function fetchService ($http) {
             return {
-                fetchAttendees: attendees,
+                fetch: fetch,
                 invite: invite
             };
 
-            function attendees (reload) {
+            function fetch () {
                 return $http.get(apiUrl + '/event/attendees/' + getEventId())
                     .then(function (response) {
                         return groupAttendees(response.data.attendees);

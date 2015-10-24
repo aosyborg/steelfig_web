@@ -5,9 +5,10 @@
         .module('app')
         .controller('LoginCtrl', LoginController);
 
-    LoginController.$inject = ['$scope', 'googleOAuth'];
-    function LoginController ($scope, googleService) {
-        $scope.signin = signin;
+    LoginController.$inject = ['$location', 'googleOAuth'];
+    function LoginController ($location, googleService) {
+        var vm = this;
+        vm.signin = signin;
 
         activate();
 
@@ -15,7 +16,9 @@
         }
 
         function signin() {
-            googleService.requestAuth();
+            googleService.requestAuth(function () {
+                $location.path('/');
+            });
         }
     }
 })();

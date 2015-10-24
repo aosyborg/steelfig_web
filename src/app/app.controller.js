@@ -6,7 +6,7 @@
         .controller('AppCtrl', AppController);
 
     AppController.$inject = ['$scope', '$log', '$location', 'steelfigAuth', 'steelfigService'];
-    function AppController ($scope, $log, $location, steelfigAuth, steelfigService) {
+    function AppController ($scope, $log, $location, steelfigAuth, steelfig) {
         $scope.$log = $log;
 
         // Force login
@@ -14,7 +14,7 @@
             return $location.path('login');
         }
 
-        steelfigService.fetchUser()
+        steelfig.user.fetch()
             .then(function (data) {
                 $scope.account = data.account;
                 $scope.user = data.user;

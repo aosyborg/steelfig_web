@@ -3,11 +3,16 @@
 
     angular
         .module('app')
-        .config(configureHttp);
+        .config(configureHttp)
+        .config(configureSteelfig);
 
     configureHttp.$inject = ['$httpProvider'];
     function configureHttp ($httpProvider) {
-        //Enable cross domain calls
         $httpProvider.defaults.useXDomain = true;
+    }
+
+    configureSteelfig.$inject = ['steelfigServiceProvider'];
+    function configureSteelfig (steelfigProvider) {
+        steelfigProvider.setApiUrl('http://api.steelfig.com:8000/v1');
     }
 })();
