@@ -1,6 +1,6 @@
 <div class="modal-header">
     <button type="button" class="close" ng-click="vm.cancel()">&times;</button>
-    <h4 class="modal-title">New Message</h4>
+    <h4 class="modal-title">{{vm.title}}</h4>
 </div>
 <div class="modal-body">
     <div class="alert alert-warning">
@@ -8,25 +8,6 @@
         Please don't include it in your message.
     </div>
     <form action="#" class="form-horizontal">
-        <div class="form-group" ng-class="{'has-error': vm.errors.toId}">
-            <label for="message-to" class="col-sm-2 control-label">To</label>
-            <div class="col-sm-10">
-                <select class="form-control" ng-model="message.toId">
-                    <option value="">Select Attendee</option>
-                    <option ng-repeat="(accountId, attendee) in vm.attendees"
-                            value="{{accountId}}">{{attendee.accountName}}</option>
-                </select>
-            </div>
-        </div>
-        <div class="form-group" ng-class="{'has-error': vm.errors.subject}">
-            <label for="message-subject" class="col-sm-2 control-label">Subject</label>
-            <div class="col-sm-10">
-                <input type="text"
-                       class="form-control"
-                       ng-model="message.subject"
-                       placeholder="subject">
-            </div>
-        </div>
         <div class="form-group" ng-class="{'has-error': vm.errors.message}">
             <label for="message-text" class="col-sm-2 control-label">Message</label>
             <div class="col-sm-10">

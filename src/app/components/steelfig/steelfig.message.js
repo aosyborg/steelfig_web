@@ -11,32 +11,49 @@
 
         provider.$get = fetchService;
 
-        fetchService.$inject = ['$http'];
-        function fetchService ($http) {
+        fetchService.$inject = ['$q', '$http'];
+        function fetchService ($q, $http) {
             return {
                 fetch: fetch,
+                create: create,
                 reply: replyMessage,
-                delete: deleteMessage
+                read: readMessage
             };
 
             function fetch () {
-                return $http.get(apiUrl + '/messages')
+                return $http.get(apiUrl + '/messages?eventId=' + getEventId())
                     .then(function (response) {
-                        return response.data.messages;
+                        return response.data;
+                    });
+            }
+
+            function create (message) {
+                message = message || {};
+                message.eventId = getEventId();
+                return $http.post(apiUrl + '/message', message)
+                    .then(function (response) {
+                        return response.data;
                     });
             }
 
             function replyMessage (message) {
                 message = message || {};
                 message.eventId = getEventId();
-                return $http.post(apiUrl + '/message', message)
+                return $http.post(apiUrl + '/message/reply', message)
                     .then(function (response) {
-                        return true;
+                        return response.data;
                     });
             }
 
-            function deleteMessage (message) {
-                return $http.delete(apiUrl + '/message/' + message.id)
+            function readMessage (message) {
+                if (message.read_at) {
+                    return $q(function (resolve, reject) {
+                        resolve(true);
+                    });
+                }
+
+                message.read_at = (new Date()).toLocaleString();
+                return $http.patch(apiUrl + '/message/read/' + message.id)
                     .then(function (response) {
                         return true;
                     });

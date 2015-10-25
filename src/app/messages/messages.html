@@ -5,25 +5,61 @@
 <h3>My Messages</h3>
 
 <div class="col-sm-offset-2">
-    <table class="table table-striped">
-        <thead>
-            <tr>
-                <th>Subject</th>
-                <th>Date</th>
-                <th>Options</th>
-            </tr>
-        </thead>
-        <tbody>
-            <tr ng-repeat="message in vm.messages.inbox" ng-class="{'bold': !message.read_at}">
-                <td>{{message.subject}}</td>
-                <td>{{message.created_at}}</td>
-                <td>
-                    <i class="fa fa-reply" ng-click="vm.reply(message)"></i>
-                    <i class="glyphicon glyphicon-trash"
-                       ng-click="vm.delete(message)"
-                       confirm="This cannot be undone!"></i>
-                </td>
-            </tr>
-        </tbody>
-    </table>
+    <tabset id="messages-list">
+        <tab heading="Inbox">
+            <table class="table table-striped">
+                <thead>
+                    <tr>
+                        <th>Subject</th>
+                        <th>Date</th>
+                        <th>Options</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr ng-repeat="message in vm.messages.inbox"
+                        ng-class="{'bold': !message.read_at}">
+                        <td ng-click="vm.open(message, true)">{{message.subject}}</td>
+                        <td ng-click="vm.open(message, true)">{{message.created_at | datetime}}</td>
+                        <td>
+                            <i class="fa fa-reply" ng-click="vm.reply(message)"></i>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </tab>
+        <tab heading="Sent">
+            <table class="table table-striped">
+                <thead>
+                    <tr>
+                        <th>To</th>
+                        <th>Subject</th>
+                        <th>Date</th>
+                        <th>Read At</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr ng-repeat="message in vm.messages.sent">
+                        <td ng-click="vm.open(message)">{{message.name}}</td>
+                        <td ng-click="vm.open(message)">{{message.subject}}</td>
+                        <td ng-click="vm.open(message)">{{message.created_at | datetime}}</td>
+                        <td ng-click="vm.open(message)">{{message.read_at | datetime}}</td>
+                    </tr>
+                </tbody>
+            </table>
+        </tab>
+    </tabset>
+
+    <div ng-if="vm.openMessage">
+        <button class="pull-right btn btn-primary"
+                ng-if="!vm.openMessage.name"
+                ng-click="vm.reply(vm.openMessage)">
+            Reply</button>
+        <h4>{{vm.openMessage.subject}}</h4>
+        <div class="message-sent">
+            <strong>Sent:</strong> {{vm.openMessage.created_at | datetime}}
+        </div>
+        <hr>
+
+        <div class="message-body">{{vm.openMessage.message}}</div>
+    <div>
 </div>

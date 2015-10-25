@@ -10,9 +10,11 @@
         var vm = this;
         var attendees = [];
         vm.messages = [];
+        vm.openMessage = false;
+
         vm.new = newMessage;
+        vm.open = openMessage;
         vm.reply = replyMessage;
-        vm.delete = deleteMessage;
 
         activate();
 
@@ -23,29 +25,37 @@
                 });
         }
 
-        function newMessage (message) {
+        function newMessage () {
             $modal.open({
                 templateUrl: 'app/messages/new-message.modal.html',
-                controller: 'NewMessageModalCtrl as vm',
+                controller: 'NewMessageModalCtrl as vm'
+            }).result
+            .then(function (messages) {
+                vm.messages = messages;
+            });
+        }
+
+        function openMessage (message, markAsRead) {
+            vm.openMessage = message;
+
+            if (markAsRead) {
+                steelfig.message.read(message);
+            }
+        }
+
+        function replyMessage (message) {
+            $modal.open({
+                templateUrl: 'app/messages/reply-message.modal.html',
+                controller: 'ReplyMessageModalCtrl as vm',
                 resolve: {
-                    message: function () {
+                    orgMessage: function () {
                         return message || {};
                     }
                 }
             }).result
-            .then(function (message) {
-                if (!message) {
-                    return;
-                }
-
-                // TODO update messages
+            .then(function (messages) {
+                vm.messages = messages;
             });
-        }
-
-        function replyMessage (message) {
-        }
-
-        function deleteMessage (message) {
         }
     }
 })();

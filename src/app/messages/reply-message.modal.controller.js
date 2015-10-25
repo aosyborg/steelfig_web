@@ -3,39 +3,32 @@
 
     angular
         .module('app')
-        .controller('NewMessageModalCtrl', NewMessageModalCtrl);
+        .controller('ReplyMessageModalCtrl', ReplyMessageModalCtrl);
 
-    NewMessageModalCtrl.$inject = ['$modalInstance', 'steelfigService'];
-    function NewMessageModalCtrl ($modalInstance, steelfig) {
+    ReplyMessageModalCtrl.$inject = ['$modalInstance', 'steelfigService', 'orgMessage'];
+    function ReplyMessageModalCtrl ($modalInstance, steelfig, orgMessage) {
         var vm = this;
         vm.send = send;
         vm.cancel = cancel;
         vm.isLoading = false;
-        vm.attendees = {};
         vm.errors = {};
+        vm.title = 'Re: ' + orgMessage.subject;
 
         activate();
 
         function activate () {
-            vm.isLoading = true;
-
-            steelfig.attendee.fetch()
-                .then(function (attendees) {
-                    vm.isLoading = false;
-                    vm.attendees = attendees;
-                });
         }
 
         function send (message) {
-            message = message || {};
             vm.isLoading = true;
             vm.errors = {
-                toId: false,
-                subject: false,
                 message: false
             };
 
-            steelfig.message.create(message)
+            message = message || {};
+            message.subject = vm.title;
+            message.replyTo = orgMessage.id;
+            steelfig.message.reply(message)
                 .then(function (messages) {
                     vm.isLoading = false;
                     $modalInstance.close(messages);
@@ -45,12 +38,6 @@
                     vm.isLoading = false;
 
                     angular.forEach(errors, function (error) {
-                        if (/toId/i.test(error)) {
-                            vm.errors.toId = true;
-                        }
-                        if (/subject/i.test(error)) {
-                            vm.errors.subject = true;
-                        }
                         if (/message/i.test(error)) {
                             vm.errors.message = true;
                         }
