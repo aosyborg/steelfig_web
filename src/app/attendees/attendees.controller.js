@@ -5,22 +5,39 @@
         .module('app')
         .controller('AttendeesCtrl', AttendeesController);
 
-    AttendeesController.$inject = ['$scope', '$modal', 'steelfigService'];
-    function AttendeesController ($scope, $modal, steelfig) {
+    AttendeesController.$inject = ['$scope', '$location', '$modal', 'steelfigService'];
+    function AttendeesController ($scope, $location, $modal, steelfig) {
         var vm = this;
         vm.alerts = [];
         vm.attendees = [];
+        vm.myRSVP = {};
+
+        vm.openRSVPModal = openRSVPModal;
         vm.isUserInGroup = isUserInGroup;
         vm.newAttendeeModal = newAttendeeModal;
+        vm.link = link;
         vm.unlink = unlink;
+        vm.showList = showList;
 
         activate();
 
         function activate () {
-            steelfig.attendee.fetch()
+            steelfig.attendee.fetchAll()
                 .then(function (attendees) {
-                    vm.attendees = attendees;
+                    setAttendees(attendees);
                 });
+        }
+
+        function openRSVPModal () {
+            $modal.open({
+                templateUrl: 'app/attendees/attendee-status.modal.html',
+                controller: 'AttendeeStatusModalCtrl as vm',
+                resolve: {
+                    rsvp: function () {
+                        return vm.myRSVP;
+                    }
+                }
+            });
         }
 
         function isUserInGroup (attendeeGroup) {
@@ -44,14 +61,45 @@
                     return;
                 }
 
-                vm.attendees = attendees;
+                setAttendees(attendees);
                 vm.alerts.push({type: 'success', msg: 'Invitation sent!'});
             });
         }
 
+        function link (attendee) {
+            steelfig.user.linkAccount(attendee)
+                .then(function (attendees) {
+                    if (!attendees) {
+                        return;
+                    }
+
+                    setAttendees(attendees);
+                });
+        }
+
         function unlink () {
             steelfig.user.unlinkAccount()
-                .then(activate);
+                .then(function (attendees) {
+                    if (!attendees) {
+                        return;
+                    }
+
+                    setAttendees(attendees);
+                });
+        }
+
+        function setAttendees (attendees) {
+            vm.attendees = attendees;
+
+            angular.forEach(attendees, function (attendee, accountId) {
+                if (accountId == $scope.account.id) {
+                    vm.myRSVP = attendee;
+                }
+            });
+        }
+
+        function showList (attendee) {
+            $location.path('/wishlist/' + attendee.attendeeId);
         }
     }
 })();

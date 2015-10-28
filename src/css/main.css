@@ -151,6 +151,15 @@ header.row {
 tr.bold {
     font-weight: bold;
 }
+tr.strikeout td {
+    position:relative
+}
+tr.strikeout td:before {
+  content: " ";
+  position: absolute;
+  left: 0; top: 50%; width: 100%;
+  border-bottom: 1px solid #999;
+}
 
 /*************
  * Messages

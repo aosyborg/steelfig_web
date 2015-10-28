@@ -44,6 +44,12 @@
                 controller: 'WishlistCtrl',
                 controllerAs: 'vm',
                 templateUrl: 'app/wishlist/wishlist.html'
+            })
+            .state('buddylist', {
+                url: '/wishlist/:attendeeId',
+                controller: 'BuddyWishlistCtrl',
+                controllerAs: 'vm',
+                templateUrl: 'app/wishlist/buddylist.html'
             });
 
         $urlRouterProvider.otherwise('/');

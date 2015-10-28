@@ -11,8 +11,8 @@
 
         provider.$get = fetchService;
 
-        fetchService.$inject = ['$q', '$http', 'steelfigAuth'];
-        function fetchService ($q, $http, auth) {
+        fetchService.$inject = ['$rootScope', '$q', '$http', 'steelfigAuth', 'steelfigAttendeeService'];
+        function fetchService ($scope, $q, $http, auth, attendeeService) {
             return {
                 signin: signin,
                 fetch: fetch,
@@ -25,10 +25,7 @@
                     .then(function (response) {
                         var apiToken = response.data.user.apiToken;
                         auth.setToken(apiToken);
-
-                        if (angular.isFunction(callback)) {
-                            callback();
-                        }
+                        callback();
                     });
             }
 
@@ -51,11 +48,26 @@
                     });
             }
 
-            function linkAccount () {
+            function linkAccount (attendee) {
+                attendee = attendee || {};
+                attendee.eventId = getEventId();
+                return $http.post(apiUrl + '/account/link', attendee)
+                    .then(function (response) {
+                        $scope.user = response.data.user;
+                        $scope.account = response.data.account;
+                        localStorage.removeItem('steelfig_user');
+                        return attendeeService.group(response.data.attendees);
+                    });
             }
 
             function unlinkAccount () {
-                return $http.post(apiUrl + '/account/unlink', {eventId: getEventId()});
+                return $http.patch(apiUrl + '/account/link', {eventId: getEventId()})
+                    .then(function (response) {
+                        $scope.user = response.data.user;
+                        $scope.account = response.data.account;
+                        localStorage.removeItem('steelfig_user');
+                        return attendeeService.group(response.data.attendees);
+                    });
             }
         }
     }

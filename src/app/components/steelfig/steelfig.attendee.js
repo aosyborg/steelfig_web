@@ -15,11 +15,21 @@
         function fetchService ($http) {
             return {
                 fetch: fetch,
-                invite: invite
+                fetchAll: fetchAll,
+                invite: invite,
+                rsvp: rsvp,
+                group: groupAttendees
             };
 
-            function fetch () {
-                return $http.get(apiUrl + '/event/attendees/' + getEventId())
+            function fetch (attendeeId) {
+                return $http.get(apiUrl + '/event/' + getEventId() + '/attendee/' + attendeeId)
+                    .then(function (response) {
+                        return response.data;
+                    });
+            }
+
+            function fetchAll () {
+                return $http.get(apiUrl + '/event/' + getEventId() + '/attendees')
                     .then(function (response) {
                         return groupAttendees(response.data.attendees);
                     });
@@ -33,6 +43,37 @@
                         return groupAttendees(response.data.attendees);
                     });
             }
+
+            function rsvp (data) {
+                data = data || {};
+                data.eventId = getEventId();
+                return $http.patch(apiUrl + '/event/rsvp', data)
+                    .then(function (response) {
+                        return response.data;
+                    });
+            }
+
+            function groupAttendees (attendees) {
+                var rows = {};
+
+                // Group users to accounts
+                angular.forEach(attendees, function (user) {
+                    if (!rows[user.accountId]) {
+                        rows[user.accountId] = {
+                            users: [user],
+                            attendeeId: user.attendeeId,
+                            accountId: user.accountId,
+                            accountName: user.accountName,
+                            comment: user.comment,
+                            status: user.status
+                        };
+                    } else {
+                        rows[user.accountId].users.push(user);
+                    }
+                });
+
+                return rows;
+            }
         }
     }
 
@@ -43,26 +84,5 @@
         }
 
         return eventId;
-    }
-
-    function groupAttendees (attendees) {
-        var rows = {};
-
-        // Group users to accounts
-        angular.forEach(attendees, function (user) {
-            if (!rows[user.accountId]) {
-                rows[user.accountId] = {
-                    users: [user],
-                    accountId: user.accountId,
-                    accountName: user.accountName,
-                    comment: user.comment,
-                    status: user.status
-                };
-            } else {
-                rows[user.accountId].users.push(user);
-            }
-        });
-
-        return rows;
     }
 })();

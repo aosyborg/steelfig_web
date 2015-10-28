@@ -5,19 +5,14 @@
         .module('app')
         .controller('LoginCtrl', LoginController);
 
-    LoginController.$inject = ['$location', 'googleOAuth'];
-    function LoginController ($location, googleService) {
+    LoginController.$inject = ['$window', 'googleOAuth'];
+    function LoginController ($window, googleService) {
         var vm = this;
         vm.signin = signin;
 
-        activate();
-
-        function activate () {
-        }
-
         function signin() {
-            googleService.requestAuth(function () {
-                $location.path('/');
+            googleService.requestAuth(function (data) {
+                $window.location.href = '/';
             });
         }
     }

@@ -16,11 +16,13 @@
             return {
                 fetch: fetch,
                 addItem: addItem,
+                updateItem: updateItem,
                 delete: deleteItem
             };
 
-            function fetch () {
-                return $http.get(apiUrl + '/wishlist')
+            function fetch (attendeeId) {
+                attendeeId = attendeeId ? '/' + attendeeId : '';
+                return $http.get(apiUrl + '/wishlist' + attendeeId)
                     .then(function (response) {
                         return response.data.wishlist;
                     });
@@ -32,6 +34,13 @@
                 return $http.post(apiUrl + '/wishlist/item', item)
                     .then(function (response) {
                         return response.data.wishlist;
+                    });
+            }
+
+            function updateItem (item) {
+                return $http.put(apiUrl + '/wishlist/item', {item:item})
+                    .then(function (response) {
+                        return response.data;
                     });
             }
 

@@ -10,6 +10,7 @@
         var vm = this;
         vm.title = data.title || "Are you sure?";
         vm.body = data.body || "This cannot be undone";
+        vm.btnLabel = data.btnLabel || "Delete";
         vm.ok = ok;
         vm.cancel = cancel;
 

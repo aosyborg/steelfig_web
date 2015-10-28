@@ -19,7 +19,7 @@
         function activate () {
             vm.isLoading = true;
 
-            steelfig.attendee.fetch()
+            steelfig.attendee.fetchAll()
                 .then(function (attendees) {
                     vm.isLoading = false;
                     vm.attendees = attendees;

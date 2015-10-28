@@ -1,0 +1,33 @@
+<ng-include src="'app/partials/signedInHeader.html'"></ng-include>
+
+<h3>Wishlist for {{vm.buddy.account_name}}</h3>
+
+<div class="col-sm-offset-2">
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th>Name</th>
+                <th>Comment</th>
+                <th>Price</th>
+                <th>Mark as Purchased</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr ng-repeat="item in vm.items"
+                ng-class="{'strikeout': item.isPurchased == 1}">
+                <td ng-if="item.url"><a href="{{item.url}}">{{item.name}}</a></td>
+                <td ng-if="!item.url">{{item.name}}</td>
+                <td>{{item.comments}}</td>
+                <td>{{item.price | currency:$:2}}</td>
+                <td>
+                    <i class="fa fa-gift"
+                       ng-click="vm.markPurchased(item)"
+                       confirm="Marking an item as purchased will let others know not to
+                       purchase this item. This cannot be undone."
+                       btnlabel="Purchase"
+                       ng-if="item.isPurchased == 0"></i>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</div>

@@ -8,6 +8,25 @@
 
 <button class="btn btn-primary pull-right" ng-click="vm.newAttendeeModal()">
     Send Invite</button>
+<button class="btn btn-info pull-right"
+        ng-if="vm.myRSVP.status == 0"
+        ng-click="vm.openRSVPModal()">
+    <i class="glyphicon glyphicon-time"></i>
+    {{vm.myRSVP.status | rsvpResponse}}
+</button>
+<button class="btn btn-success pull-right"
+        ng-if="vm.myRSVP.status == 1"
+        ng-click="vm.openRSVPModal()">
+    <i class="glyphicon glyphicon-ok"></i>
+    {{vm.myRSVP.status | rsvpResponse}}
+</button>
+<button class="btn btn-danger pull-right"
+        ng-if="vm.myRSVP.status == 2"
+        ng-click="vm.openRSVPModal()">
+    <i class="glyphicon glyphicon-remove"></i>
+    {{vm.myRSVP.status | rsvpResponse}}
+</button>
+
 <h3 class="col-sm-offset-2" >Who's Going</h3>
 
 <div class="col-sm-offset-2">
@@ -15,9 +34,9 @@
         <thead>
             <tr>
                 <th>Name</th>
-                <th>Status</th>
+                <th>RSVP</th>
                 <th>Comment</th>
-                <th>Options</th>
+                <th>Wishlist</th>
             </tr>
         </thead>
         <tbody>
@@ -27,20 +46,32 @@
                         <img ng-src="{{user.avatar ? user.avatar : '/images/default-avatar.png'}}"
                              class="avatar" tooltip-placement="top" tooltip="{{user.userName}}">
                     </span>
+                    <span ng-if="!vm.isUserInGroup(attendee)">
+                        <i class="fa fa-link"
+                           confirm="Linking accounts will merge all your messages and
+                           wishlist items. You will then share an account with
+                           {{attendee.accountName}}. Other members in this group will be
+                           notified."
+                           btnlabel="Link my account"
+                           ng-click="vm.link(attendee)"></i>
+                    </span>
+                    <span ng-if="vm.isUserInGroup(attendee) && attendee.users.length > 1">
+                        <i class="fa fa-unlink"
+                           confirm="Unlinking your account will cause you to have your own
+                           wishlist with your own private messages. Members in this group
+                           will be notified."
+                           btnlabel="Unlink my account"
+                           ng-click="vm.unlink(attendee)"></i>
+                    </span>
                     {{attendee.accountName}}
                 </td>
-                <td>
-                    <attending-status status="attendee.status"></attending-status>
-                </td>
+                <td>{{attendee.status | rsvpResponse}}</td>
                 <td>{{attendee.comment}}</td>
                 <td>
-                    <span ng-if="vm.isUserInGroup(attendee) && attendee.users.length > 1">
-                        <i class="fa fa-unlink" ng-click="vm.unlink()"></i>
-                    </span>
                     <span ng-if="!vm.isUserInGroup(attendee)">
-                        <i class="fa fa-link" ng-click="vm.link(attendee.accountId)"></i>
-                        <i class="fa fa-envelope" ng-click="vm.sendMessage(attendee.accountId)"></i>
-                        <i class="fa fa-list" ng-click="vm.showList(attendee.accountId)"></i>
+                        <div ng-click="vm.showList(attendee)">
+                            <i class="fa fa-list"></i> View
+                        </div>
                     </span>
                 </td>
             </tr>

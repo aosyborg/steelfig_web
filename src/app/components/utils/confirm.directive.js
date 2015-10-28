@@ -13,7 +13,8 @@
             scope: {
                 ngClick: '&',
                 confirm: '@',
-                confirmTitle: '@'
+                confirmtitle: '@',
+                btnlabel: '@'
             },
             link: link
         };
@@ -22,8 +23,9 @@
             element.unbind('click').bind('click', function ($event) {
                 $event.preventDefault();
                 var data = {
-                    title: scope.title,
-                    body: scope.confirm
+                    title: scope.confirmtitle,
+                    body: scope.confirm,
+                    btnLabel: scope.btnlabel
                 };
 
                 $modal.open({

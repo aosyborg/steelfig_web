@@ -9,6 +9,10 @@
     function AppController ($scope, $log, $location, steelfigAuth, steelfig) {
         $scope.$log = $log;
 
+        // TODO: don't leave this here!!
+        $scope.eventId = 1;
+        localStorage.setItem('eventId', 1);
+
         // Force login
         if (!steelfigAuth.loadToken()) {
             return $location.path('login');
@@ -19,9 +23,6 @@
                 $scope.account = data.account;
                 $scope.user = data.user;
 
-                // TODO: don't leave this here!!
-                $scope.eventId = 1;
-                localStorage.setItem('eventId', 1);
             });
     }
 })();
