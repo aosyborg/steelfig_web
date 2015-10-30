@@ -2,48 +2,35 @@
 
 <h3>Welcome</h3>
 
-<div ng-controller="LandingCtrl" class="main">
-    <div class="row widget">
-        <div class="wbody">
-            <div class="event-when">
-                <strong>
-                    <i class="fa fa-calendar"></i> When:
-                </strong>
-                TBA - Please keep the schedule up-to-date!
-            </div>
-
-            <div class="event-where">
-                <strong>
-                    <i class="fa fa-map-marker"></i>&nbsp; Where:
-                </strong>
-                TBA
-            </div>
-
-            <div class="event-status">
-                <strong>
-                    <i class="fa fa-mail-reply"></i> My Response:
-                </strong>
-                Change me
-                <i class="glyphicon glyphicon-pencil cursor-pointer"
-                   data-toggle="modal"
-                   data-target="#change-response-modal"></i>
-            </div>
-        </div>
+<div class="col-sm-offset-2">
+    <div>
+        RSVP:
+        <button class="btn btn-info"
+                ng-if="vm.myRSVP.status == 0"
+                ng-click="vm.openRSVPModal()">
+            <i class="glyphicon glyphicon-time"></i>
+            {{vm.myRSVP.status | rsvpResponse}}
+        </button>
+        <button class="btn btn-success"
+                ng-if="vm.myRSVP.status == 1"
+                ng-click="vm.openRSVPModal()">
+            <i class="glyphicon glyphicon-ok"></i>
+            {{vm.myRSVP.status | rsvpResponse}}
+        </button>
+        <button class="btn btn-danger"
+                ng-if="vm.myRSVP.status == 2"
+                ng-click="vm.openRSVPModal()">
+            <i class="glyphicon glyphicon-remove"></i>
+            {{vm.myRSVP.status | rsvpResponse}}
+        </button>
     </div>
-
-    <div class="row widget">
-        <div class="whead">
-            Announcements
-        </div>
-        <div class="wbody">
-            Welcome to Steelfig! Please:
-            <ul>
-                <li>Keep your response updated! Click the pencil to change it.</li>
-                <li>Check whose going and send additional invites to anyone I may have
-                missed.</li>
-                <li>Input your available times for a get together.</li>
-                <li>Start adding items to your wishlist.</li>
-            </ul>
-        </div>
+    <div>
+        Welcome to Steelfig! Please:
+        <ul>
+            <li>Keep your RSVP updated!</li>
+            <li>Check whose going and send additional invites to anyone I may have missed.</li>
+            <li>Input your available times for a get together.</li>
+            <li>Start adding items to your wishlist.</li>
+        </ul>
     </div>
 </div>

@@ -164,7 +164,38 @@ tr.strikeout td:before {
 /*************
  * Messages
  ************/
-#messages-list {
+#messages-list .tab-content {
     height: 250px;
-    overflow: scroll;
+}
+
+/*************
+ * Schedule
+ ************/
+.scheduler > tbody > tr > td {
+    border-top: 0 none;
+}
+.scheduler thead td:first-child {
+    background-color: #ffffff;
+}
+.scheduler thead th {
+    background-color: #dce9fa;
+}
+.scheduler tbody td {
+    text-align: center;
+    border: 4px solid #ffffff;
+}
+.scheduler tbody td.no {
+    background-color: #f7e9e8;
+}
+.scheduler tbody td.yes {
+    background-color: #e3f1e2;
+    color: #3c763d;
+}
+
+/*************
+ * Wishlist
+ ************/
+table {
+    table-layout: auto;
+    width: 100%;
 }

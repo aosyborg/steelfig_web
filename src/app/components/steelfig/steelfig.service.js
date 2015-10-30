@@ -6,24 +6,20 @@
         .provider('steelfigService', Steelfig);
 
     function Steelfig () {
-        var provider = this,
-            apiUrl;
+        var provider = this;
 
-        provider.setApiUrl = setApiUrl;
         provider.$get = fetchService;
-
-        function setApiUrl (url) {
-            apiUrl = url;
-        }
 
         fetchService.$inject = [
             'steelfigUserService',
+            'steelfigScheduleService',
             'steelfigAttendeeService',
             'steelfigMessageService',
             'steelfigWishlistService'];
-        function fetchService (user, attendee, message, wishlist) {
+        function fetchService (user, schedule, attendee, message, wishlist) {
             return {
                 user: user,
+                schedule: schedule,
                 attendee: attendee,
                 message: message,
                 wishlist: wishlist

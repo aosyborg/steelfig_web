@@ -7,9 +7,14 @@
 
     function SteelfigAttendee () {
         var provider = this,
-            apiUrl = 'http://api.steelfig.com:8000/v1';
+            apiUrl = '';
 
         provider.$get = fetchService;
+        provider.setApiUrl = setApiUrl;
+
+        function setApiUrl (url) {
+            apiUrl = url;
+        }
 
         fetchService.$inject = ['$http'];
         function fetchService ($http) {

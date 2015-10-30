@@ -7,20 +7,25 @@
 
     function SteelfigWishlist () {
         var provider = this,
-            apiUrl = 'http://api.steelfig.com:8000/v1';
+            apiUrl = '';
 
         provider.$get = fetchService;
+        provider.setApiUrl = setApiUrl;
+
+        function setApiUrl (url) {
+            apiUrl = url;
+        }
 
         fetchService.$inject = ['$http'];
         function fetchService ($http) {
             return {
-                fetch: fetch,
-                addItem: addItem,
-                updateItem: updateItem,
-                delete: deleteItem
+                fetch: fetchItems,
+                set: setItem,
+                delete: deleteItem,
+                markPurchased: markPurchased
             };
 
-            function fetch (attendeeId) {
+            function fetchItems (attendeeId) {
                 attendeeId = attendeeId ? '/' + attendeeId : '';
                 return $http.get(apiUrl + '/wishlist' + attendeeId)
                     .then(function (response) {
@@ -28,7 +33,7 @@
                     });
             }
 
-            function addItem (item) {
+            function setItem (item) {
                 item = item || {};
                 item.eventId = getEventId();
                 return $http.post(apiUrl + '/wishlist/item', item)
@@ -37,17 +42,18 @@
                     });
             }
 
-            function updateItem (item) {
-                return $http.put(apiUrl + '/wishlist/item', {item:item})
-                    .then(function (response) {
-                        return response.data;
-                    });
-            }
-
             function deleteItem (item) {
                 return $http.delete(apiUrl + '/wishlist/item/' + item.id)
                     .then(function (response) {
                         return true;
+                    });
+            }
+
+            function markPurchased (item) {
+                item.isPurchased = 1;
+                return $http.patch(apiUrl + '/wishlist/purchase/item/' + item.id)
+                    .then(function (response) {
+                        return response.data;
                     });
             }
         }

@@ -7,9 +7,14 @@
 
     function SteelfigUser () {
         var provider = this,
-            apiUrl = 'http://api.steelfig.com:8000/v1';
+            apiUrl = '';
 
         provider.$get = fetchService;
+        provider.setApiUrl = setApiUrl;
+
+        function setApiUrl (url) {
+            apiUrl = url;
+        }
 
         fetchService.$inject = ['$rootScope', '$q', '$http', 'steelfigAuth', 'steelfigAttendeeService'];
         function fetchService ($scope, $q, $http, auth, attendeeService) {

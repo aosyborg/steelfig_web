@@ -3,13 +3,14 @@
 
     angular
         .module('app')
-        .controller('NewItemModalCtrl', NewItemModalCtrl);
+        .controller('EditItemModalCtrl', EditItemModalCtrl);
 
-    NewItemModalCtrl.$inject = ['$modalInstance', 'steelfigWishlistService'];
-    function NewItemModalCtrl ($modalInstance, steelfigWishlistService) {
+    EditItemModalCtrl.$inject = ['$modalInstance', 'steelfigWishlistService', 'item'];
+    function EditItemModalCtrl ($modalInstance, steelfigWishlistService, item) {
         var vm = this;
         vm.send = send;
         vm.cancel = cancel;
+        vm.item = item || {};
         vm.isLoading = false;
         vm.errors = {
             name: false,
@@ -18,14 +19,14 @@
             comments: false
         };
 
-        function send (item) {
+        function send () {
             vm.errors.name = false;
             vm.errors.price = false;
             vm.errors.url = false;
             vm.errors.comments = false;
             vm.isLoading = true;
 
-            steelfigWishlistService.addItem(item)
+            steelfigWishlistService.set(vm.item)
                 .then(function (items) {
                     vm.isLoading = false;
                     $modalInstance.close(items);

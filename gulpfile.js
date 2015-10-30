@@ -10,8 +10,10 @@ var gulp = require('gulp'),
     cdnFiles = {
         bootstrap: '//maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css',
         fontawesome: '//maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css',
+        jquery: '//code.jquery.com/jquery-2.1.4.min.js',
+        jqueryui: '//code.jquery.com/ui/1.11.4/jquery-ui.min.js',
         angular: '//ajax.googleapis.com/ajax/libs/angularjs/1.3.14/angular.min.js',
-        angularui: '//cdnjs.cloudflare.com/ajax/libs/angular-ui-router/0.2.13/angular-ui-router.min.js',
+        angularrouter: '//cdnjs.cloudflare.com/ajax/libs/angular-ui-router/0.2.13/angular-ui-router.min.js',
         angularbootstrap: '//cdnjs.cloudflare.com/ajax/libs/angular-ui-bootstrap/0.13.0/ui-bootstrap.min.js',
         googleapi: '//apis.google.com/js/client.js'
     },
@@ -109,8 +111,11 @@ function buildDist () {
             )
         )
         .pipe(plugins.replace('../bower_components/momentjs/moment.js', cdnFiles.momentjs))
+        .pipe(plugins.replace('../bower_components/jquery/dist/jquery.js', cdnFiles.jquery))
+        .pipe(plugins.replace('../bower_components/jquery-ui/jquery-ui.js', cdnFiles.jqueryui))
         .pipe(plugins.replace('../bower_components/angular/angular.js', cdnFiles.angular))
         .pipe(plugins.replace('../bower_components/angular-ui-router/release/angular-ui-router.js', cdnFiles.angularui))
+        .pipe(plugins.replace('../bower_components/ng-sortable/dist/ng-sortable.js', cdnFiles.ngsortable))
         .pipe(plugins.replace('../bower_components/angular-bootstrap/ui-bootstrap.js', cdnFiles.angularbootstrap))
         .pipe(plugins.replace('../bower_components/angular-moment/angular-moment.js', cdnFiles.angularMoment))
         .pipe(plugins.replace('../bower_components/bootstrap/dist/css/bootstrap.min.css', cdnFiles.bootstrap))

@@ -27,6 +27,12 @@
                 controllerAs: 'vm',
                 templateUrl: 'app/login/login.html'
             })
+            .state('schedule', {
+                url: '/schedule',
+                controller: 'ScheduleCtrl',
+                controllerAs: 'vm',
+                templateUrl: 'app/schedule/schedule.html'
+            })
             .state('attendees', {
                 url: '/attendees',
                 controller: 'AttendeesCtrl',

@@ -3,6 +3,7 @@
 
     angular
         .module('app', [
+            'ui',
             'ui.router',
             'ui.bootstrap',
             'steelfig',

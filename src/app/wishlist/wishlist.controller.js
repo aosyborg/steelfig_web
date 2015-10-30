@@ -11,6 +11,16 @@
         vm.items = [];
         vm.edit = editItem;
         vm.delete = deleteItem;
+        vm.sortListeners = {
+            update: function (event, ui) {
+                var i = ui.item.sortable.index,
+                    item = vm.items[i],
+                    newPosition = ui.item.index();
+
+                item.sort = newPosition;
+                steelfig.wishlist.set(item);
+            }
+        };
 
         activate();
 

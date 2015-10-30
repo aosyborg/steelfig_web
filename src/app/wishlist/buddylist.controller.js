@@ -28,8 +28,7 @@
         }
 
         function markPurchased (item) {
-            //item.isPurchased = 1;
-            steelfig.wishlist.updateItem(item);
+            steelfig.wishlist.markPurchased(item);
         }
     }
 })();
