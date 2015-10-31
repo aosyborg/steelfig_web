@@ -15,6 +15,7 @@
         vm.openRSVPModal = openRSVPModal;
         vm.isUserInGroup = isUserInGroup;
         vm.newAttendeeModal = newAttendeeModal;
+        vm.settingsModal = settingsModal;
         vm.link = link;
         vm.unlink = unlink;
         vm.showList = showList;
@@ -63,6 +64,18 @@
 
                 setAttendees(attendees);
                 vm.alerts.push({type: 'success', msg: 'Invitation sent!'});
+            });
+        }
+
+        function settingsModal () {
+            $modal.open({
+                templateUrl: 'app/attendees/settings.modal.html',
+                controller: 'SettingsModalCtrl as vm',
+                resolve: {
+                    rsvp: function () {
+                        return vm.myRSVP;
+                    }
+                }
             });
         }
 

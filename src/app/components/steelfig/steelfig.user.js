@@ -21,6 +21,7 @@
             return {
                 signin: signin,
                 fetch: fetch,
+                updateAccount: updateAccount,
                 linkAccount: linkAccount,
                 unlinkAccount: unlinkAccount,
             };
@@ -50,6 +51,15 @@
                     .then(function (response) {
                         localStorage.setItem(localStorageKey, JSON.stringify(response.data));
                         return response.data;
+                    });
+            }
+
+            function updateAccount (data) {
+                return $http.patch(apiUrl + '/account', data)
+                    .then(function (response) {
+                        $scope.account = response.data.account;
+                        localStorage.removeItem('steelfig_user');
+                        return response.data.account;
                     });
             }
 

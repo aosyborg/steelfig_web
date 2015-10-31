@@ -1,0 +1,22 @@
+<div class="modal-header">
+    <button type="button" class="close" ng-click="vm.cancel()">&times;</button>
+    <h4 class="modal-title">Settings</h4>
+</div>
+<div class="modal-body">
+    <form action="#" class="form-horizontal">
+        <div class="form-group" ng-class="{'has-error': vm.errors.name}">
+            <label for="invite-name" class="col-sm-2 control-label">Account Name</label>
+            <div class="col-sm-10">
+                <input type="text"
+                       class="form-control"
+                       placeholder="Account Name"
+                       ng-model="vm.accountName" />
+            </div>
+        </div>
+    </form>
+</div>
+<div class="modal-footer">
+    <img src="/images/loading.gif"  ng-class="{loading: !vm.isLoading}">
+    <button type="button" class="btn btn-default" ng-click="vm.cancel()">Cancel</button>
+    <button type="button" class="btn btn-primary" ng-click="vm.save()">Update</button>
+</div>
