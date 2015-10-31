@@ -3,8 +3,12 @@
 <h3>Welcome</h3>
 
 <div class="col-sm-offset-2">
-    <div>
-        RSVP:
+    <p>
+        Lots of updates made over last year! As always please let me know if you find a
+        bug and I'll do my best to fix it.
+    </p>
+    <p>
+        In the mean time, please keep your RSVP up-to-date. Your RSVP:
         <button class="btn btn-info"
                 ng-if="vm.myRSVP.status == 0"
                 ng-click="vm.openRSVPModal()">
@@ -23,14 +27,36 @@
             <i class="glyphicon glyphicon-remove"></i>
             {{vm.myRSVP.status | rsvpResponse}}
         </button>
-    </div>
-    <div>
-        Welcome to Steelfig! Please:
-        <ul>
-            <li>Keep your RSVP updated!</li>
-            <li>Check whose going and send additional invites to anyone I may have missed.</li>
-            <li>Input your available times for a get together.</li>
-            <li>Start adding items to your wishlist.</li>
-        </ul>
-    </div>
+    </p>
+
+    <h3>FAQs</h3>
+    <p>
+        <strong>When can I start adding stuff to my wishlist?</strong>
+        Now! The sooner the better!
+    </p>
+    <p>
+        <strong>How/when are names going to be drawn?</strong>
+        Name will be randomly drawn and you will get an email with the name of who you are
+        to buy for. The list is only drawn from people who have an "I will attend!" RSVP
+        and will be drawn November 22nd. The process is done via script and not recorded.
+        I will not know the results.
+    </p>
+    <p>
+        <strong>When will the exchange happen?</strong>
+        If only there was a calendar of sorts where people could say when they are free...
+        Oooh look at that on the left! Let us know when you're free and well try to find a
+        time that works for everyone.
+    </p>
+    <p>
+        <strong>Any wishlist requirements?</strong>
+        If you are participating, please add at least 5 items to your list but more is
+        always better. Also remember the limit is $80 so don't have $100+ items!
+    </p>
+    <p>
+        <strong>I want to participate together with my SO/mistresses.</strong>
+        That is not a question, but don't worry I got you covered. Have each person login,
+        then on "Who's Going" click the "link" icon next to whoever you wish to join
+        forces with. You will then merge accounts and each of you will have access to one
+        joint account.
+    </p>
 </div>
