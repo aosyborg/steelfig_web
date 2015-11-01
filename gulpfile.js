@@ -12,10 +12,10 @@ var gulp = require('gulp'),
         fontawesome: '//maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css',
         jquery: '//code.jquery.com/jquery-2.1.4.min.js',
         jqueryui: '//code.jquery.com/ui/1.11.4/jquery-ui.min.js',
-        angular: '//ajax.googleapis.com/ajax/libs/angularjs/1.3.14/angular.min.js',
+        angular: '//ajax.googleapis.com/ajax/libs/angularjs/1.4.7/angular.min.js',
         angularui: '//cdnjs.cloudflare.com/ajax/libs/angular-ui/0.4.0/angular-ui.js',
-        angularrouter: '//cdnjs.cloudflare.com/ajax/libs/angular-ui-router/0.2.13/angular-ui-router.min.js',
-        angularbootstrap: '//cdnjs.cloudflare.com/ajax/libs/angular-ui-bootstrap/0.13.0/ui-bootstrap.min.js',
+        angularrouter: '//cdnjs.cloudflare.com/ajax/libs/angular-ui-router/0.2.15/angular-ui-router.min.js',
+        angularbootstrap: '//cdnjs.cloudflare.com/ajax/libs/angular-ui-bootstrap/0.14.3/ui-bootstrap.min.js',
         googleapi: '//apis.google.com/js/client.js'
     },
     srcPaths = {
