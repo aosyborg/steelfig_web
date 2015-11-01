@@ -165,7 +165,7 @@ tr.strikeout td:before {
  * Messages
  ************/
 #messages-list .tab-content {
-    height: 250px;
+    min-height: 250px;
 }
 
 /*************

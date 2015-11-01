@@ -5,8 +5,8 @@
         .module('app')
         .controller('AttendeesCtrl', AttendeesController);
 
-    AttendeesController.$inject = ['$scope', '$location', '$modal', 'steelfigService'];
-    function AttendeesController ($scope, $location, $modal, steelfig) {
+    AttendeesController.$inject = ['$scope', '$location', '$modal', '$timeout', 'steelfigService'];
+    function AttendeesController ($scope, $location, $modal, $timeout, steelfig) {
         var vm = this;
         vm.alerts = [];
         vm.attendees = [];
@@ -64,6 +64,10 @@
 
                 setAttendees(attendees);
                 vm.alerts.push({type: 'success', msg: 'Invitation sent!'});
+                $timeout(function () {
+                    console.log('working');
+                    vm.alerts.pop();
+                }, 1000);
             });
         }
 
