@@ -27,10 +27,11 @@
                 var eventId = getEventId();
                 return $http.get(apiUrl + '/schedule?eventId=' + eventId)
                     .then(function (response) {
-                        var schedules = response.data;
+                        var schedules = response.data,
+                            date;
 
                         for (var i in schedules) {
-                            var date = schedules[i].availableAt;
+                            date = schedules[i].available_at;
                             date = date.replace(/Z/i, '');
 
                             schedules[i].available_at = new Date(date);
