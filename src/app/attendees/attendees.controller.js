@@ -65,7 +65,6 @@
                 setAttendees(attendees);
                 vm.alerts.push({type: 'success', msg: 'Invitation sent!'});
                 $timeout(function () {
-                    console.log('working');
                     vm.alerts.pop();
                 }, 1000);
             });

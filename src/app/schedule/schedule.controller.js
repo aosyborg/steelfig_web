@@ -73,9 +73,7 @@
             angular.forEach(schedules, function (schedule) {
                 var date = schedule.available_at;
 
-                console.log(schedule.attendee_id, attendee.attendeeId);
                 if (schedule.attendee_id == attendee.attendeeId) {
-                    console.log(date, day, hour);
                     if (date.getFullYear() == day.getFullYear() &&
                         date.getMonth() == day.getMonth() &&
                         date.getDate() == day.getDate() &&
@@ -85,7 +83,6 @@
                 }
             });
 
-            console.log(result);
             return result;
         }
 
