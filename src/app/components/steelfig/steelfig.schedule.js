@@ -30,7 +30,10 @@
                         var schedules = response.data;
 
                         for (var i in schedules) {
-                            schedules[i].available_at = new Date(schedules[i].available_at);
+                            var date = schedules[i].availableAt;
+                            date = date.replace(/Z/i, '');
+
+                            schedules[i].available_at = new Date(date);
                         }
 
                         return schedules;
