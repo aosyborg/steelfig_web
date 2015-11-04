@@ -15,7 +15,9 @@
         <tbody>
             <tr ng-repeat="item in vm.items"
                 ng-class="{'strikeout': item.isPurchased == 1}">
-                <td ng-if="item.url"><a href="{{item.url}}">{{item.name}}</a></td>
+                <td ng-if="item.url">
+                    <a href="{{item.url}}" target="_blank">{{item.name}}</a>
+                </td>
                 <td ng-if="!item.url">{{item.name}}</td>
                 <td>{{item.comments}}</td>
                 <td>{{item.price | currency:$:2}}</td>
