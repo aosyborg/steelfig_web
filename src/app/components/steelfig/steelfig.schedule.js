@@ -32,8 +32,7 @@
 
                         for (var i in schedules) {
                             schedules[i].available_at = new Date(
-                                schedules[i].available_at +
-                                (date.getTimezoneOffset() * 60 * 1000));
+                                schedules[i].available_at);
                         }
 
                         return schedules;
