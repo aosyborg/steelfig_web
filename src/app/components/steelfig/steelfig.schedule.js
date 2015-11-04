@@ -28,12 +28,12 @@
                 return $http.get(apiUrl + '/schedule?eventId=' + eventId)
                     .then(function (response) {
                         var schedules = response.data,
-                            date;
+                            date = new Date();
 
                         for (var i in schedules) {
-                            date = schedules[i].available_at;
-
-                            schedules[i].available_at = new Date(date);
+                            schedules[i].available_at = new Date(
+                                schedules[i].available_at +
+                                (date.getTimezoneOffset() * 60 * 1000));
                         }
 
                         return schedules;
