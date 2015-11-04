@@ -49,7 +49,7 @@
                 return;
             }
 
-            day = new Date(firstDay.getTime() - A_DAY);
+            day = new Date(firstDay.getTime() - (A_DAY * 3));
             vm.days.unshift(day);
             vm.days.pop();
         }
@@ -62,7 +62,7 @@
                 return;
             }
 
-            day = new Date(lastDay.getTime() + A_DAY);
+            day = new Date(lastDay.getTime() + (A_DAY * 3));
             vm.days.shift();
             vm.days.push(day);
         }
