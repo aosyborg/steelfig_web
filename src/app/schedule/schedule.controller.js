@@ -42,29 +42,23 @@
         }
 
         function back () {
-            var day,
-                firstDay = vm.days[0];
+            var day;
 
-            if (firstDay.getTime() <= calendarStart.getTime()) {
-                return;
+            for (var i=1; vm.days[0].getTime()>calendarStart.getTime() && i<=3; i++) {
+                day = new Date(vm.days[0].getTime() - A_DAY);
+                vm.days.unshift(day);
+                vm.days.pop();
             }
-
-            day = new Date(firstDay.getTime() - (A_DAY * 3));
-            vm.days.unshift(day);
-            vm.days.pop();
         }
 
         function forward () {
-            var day,
-                lastDay = vm.days[vm.days.length - 1];
+            var day;
 
-            if (lastDay.getTime() >= calendarEnd.getTime()) {
-                return;
+            for (var i=1; vm.days[2].getTime()<calendarEnd.getTime() && i<=3; i++) {
+                day = new Date(vm.days[2].getTime() + A_DAY);
+                vm.days.shift();
+                vm.days.push(day);
             }
-
-            day = new Date(lastDay.getTime() + (A_DAY * 3));
-            vm.days.shift();
-            vm.days.push(day);
         }
 
         function isAvailable (attendee, day, hour) {
