@@ -32,7 +32,6 @@
 
                         for (var i in schedules) {
                             date = schedules[i].available_at;
-                            date = date.replace(/Z/i, '');
 
                             schedules[i].available_at = new Date(date);
                         }
