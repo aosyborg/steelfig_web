@@ -36,6 +36,10 @@
             function setItem (item) {
                 item = item || {};
                 item.eventId = getEventId();
+                if (angular.isString(item.price)) {
+                    item.price = item.price.replace(/\$/, '');
+                }
+
                 return $http.post(apiUrl + '/wishlist/item', item)
                     .then(function (response) {
                         return response.data.wishlist;
