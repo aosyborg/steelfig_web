@@ -4,6 +4,7 @@
     angular
         .module('app')
         .config(configureHttp)
+        .config(configureSceDelegate)
         .config(configureSteelfigUser)
         .config(configureSteelfigSchedule)
         .config(configureSteelfigAttendee)
@@ -15,6 +16,14 @@
     configureHttp.$inject = ['$httpProvider'];
     function configureHttp ($httpProvider) {
         $httpProvider.defaults.useXDomain = true;
+    }
+
+    configureSceDelegate.$inject = ['$sceDelegateProvider'];
+    function configureSceDelegate ($sceDelegateProvider) {
+        $sceDelegateProvider.resourceUrlWhitelist([
+            'self',
+            'http://api.steelfig.com/*'
+        ]);
     }
 
     configureSteelfigUser.$inject = ['steelfigUserServiceProvider'];
