@@ -16,6 +16,12 @@
     configureHttp.$inject = ['$httpProvider'];
     function configureHttp ($httpProvider) {
         $httpProvider.defaults.useXDomain = true;
+
+        //Reset headers to avoid OPTIONS request (aka preflight)
+        $httpProvider.defaults.headers.common = {};
+        $httpProvider.defaults.headers.post = {};
+        $httpProvider.defaults.headers.put = {};
+        $httpProvider.defaults.headers.patch = {};
     }
 
     configureSceDelegate.$inject = ['$sceDelegateProvider'];
