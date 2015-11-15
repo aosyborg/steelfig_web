@@ -31,7 +31,6 @@
             <table class="table table-striped">
                 <thead>
                     <tr>
-                        <th>To</th>
                         <th>Subject</th>
                         <th>Date</th>
                         <th>Read At</th>
@@ -39,7 +38,6 @@
                 </thead>
                 <tbody>
                     <tr ng-repeat="message in vm.messages.sent">
-                        <td ng-click="vm.open(message)">{{message.name}}</td>
                         <td ng-click="vm.open(message)">{{message.subject}}</td>
                         <td ng-click="vm.open(message)">{{message.created_at | datetime}}</td>
                         <td ng-click="vm.open(message)">{{message.read_at | datetime}}</td>
