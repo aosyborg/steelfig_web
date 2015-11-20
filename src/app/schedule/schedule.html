@@ -38,17 +38,17 @@
                 <tr ng-repeat="(i, attendee) in vm.attendees">
                     <td ng-if="attendee.accountId == account.id">
                         <input type="checkbox"
-                               ng-click="vm.modifyAvailability(day, 14)"
+                               ng-click="vm.modifyAvailability(attendee, day, 14)"
                                ng-checked="vm.isAvailable(attendee, day, 14)" />
                     </td>
                     <td ng-if="attendee.accountId == account.id">
                         <input type="checkbox"
-                               ng-click="vm.modifyAvailability(day, 18)"
+                               ng-click="vm.modifyAvailability(attendee, day, 18)"
                                ng-checked="vm.isAvailable(attendee, day, 18)">
                     </td>
                     <td ng-if="attendee.accountId == account.id">
                         <input type="checkbox"
-                               ng-click="vm.modifyAvailability(day, 20)"
+                               ng-click="vm.modifyAvailability(attendee, day, 20)"
                                ng-checked="vm.isAvailable(attendee, day, 20)">
                     </td>
 

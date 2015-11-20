@@ -1,5 +1,29 @@
 <div id="menu" class="pull-left col-sm-2" collapse="menuIsCollapsed">
-    <ul>
+    <ul class="nav navbar-nav">
+        <li ng-click="go('/')">
+            <i class="fa fa-home"></i>
+            Dashboard
+        </li>
+        <li ng-click="go('/schedule')">
+            <i class="fa fa-calendar"></i>
+            Schedule
+        </li>
+        <li ng-click="go('/attendees')">
+            <i class="fa fa-list-alt"></i>
+            Who's Going
+        </li>
+        <li ng-click="go('/messages')">
+            <i class="fa fa-envelope"></i>
+            My Messages
+        </li>
+        <li ng-click="go('/wishlist')">
+            <i class="fa fa-list"></i>
+            My Wishlist
+        </li>
+    </ul>
+</div>
+<div id="menu" class="pull-left col-sm-2 visible-md-inline visible-lg-inline">
+    <ul class="nav navbar-nav">
         <li ng-click="go('/')">
             <i class="fa fa-home"></i>
             Dashboard

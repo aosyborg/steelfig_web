@@ -80,9 +80,36 @@
             return result;
         }
 
-        function modifyAvailability (day, hour) {
+        function modifyAvailability (attendee, day, hour) {
             day.setHours(hour);
             steelfig.schedule.modify(day);
+
+            // Remove the date if it exists
+            var result = false;
+            angular.forEach(schedules, function (schedule, i) {
+                var date = schedule.available_at;
+
+                if (schedule.attendee_id == attendee.attendeeId) {
+                    if (date.getFullYear() == day.getFullYear() &&
+                        date.getMonth() == day.getMonth() &&
+                        date.getDate() == day.getDate() &&
+                        date.getHours() == hour) {
+                        schedules.splice(i, 1);
+                        result = true;
+                        return false;
+                    }
+                }
+            });
+
+            // Add the date if it doesn't
+            if (!result) {
+                schedules.push({
+                    attendee_id: attendee.attendeeId,
+                    available_at: new Date(day.getTime())
+                });
+            }
+
+            return result;
         }
     }
 })();
