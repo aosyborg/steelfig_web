@@ -21,7 +21,7 @@
             function requestAuth (callback) {
                 var options = {
                     scope: 'email profile',
-                    client_id: '351176360892-f92klr20iki3af3u8gl4v49t3t42eh6s.apps.googleusercontent.com'
+                    client_id: '351176360892-s0jdsjf903iu233rgndiiojh00soikc9.apps.googleusercontent.com'
                 };
 
                 provider.callback = callback;
