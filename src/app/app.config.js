@@ -11,7 +11,7 @@
         .config(configureSteelfigMessage)
         .config(configureSteelfigWishlist);
 
-    var steelfigApiUrl = 'http://api.steelfig.com:8000/v1';
+    var steelfigApiUrl = 'https://api.steelfig.com/v1';
 
     configureHttp.$inject = ['$httpProvider'];
     function configureHttp ($httpProvider) {
@@ -29,7 +29,7 @@
     function configureSceDelegate ($sceDelegateProvider) {
         $sceDelegateProvider.resourceUrlWhitelist([
             'self',
-            'http://api.steelfig.com/*'
+            'https://api.steelfig.com/*'
         ]);
     }
 
