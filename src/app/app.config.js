@@ -11,7 +11,13 @@
         .config(configureSteelfigMessage)
         .config(configureSteelfigWishlist);
 
-    var steelfigApiUrl = 'https://api.steelfig.com/v1';
+    var port = window.location.port,
+        debug = Boolean(port),
+        environments = {
+            dev: 'http://localhost:8000/v1',
+            prod: 'https://api.steelfig.com/v1'
+        },
+        steelfigApiUrl = environments[debug ? 'dev' : 'prod'];
 
     configureHttp.$inject = ['$httpProvider'];
     function configureHttp ($httpProvider) {

@@ -9,8 +9,8 @@
     function ScheduleController (steelfig) {
         var vm = this,
             A_DAY = 86400000,
-            calendarStart = new Date('December 12, 2015'),
-            calendarEnd = new Date('December 28, 2015'),
+            calendarStart = new Date('December 12, 2016'),
+            calendarEnd = new Date('December 28, 2016'),
             currentDay = new Date(calendarStart.getTime()),
             schedules = [];
 
