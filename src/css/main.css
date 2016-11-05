@@ -126,6 +126,7 @@ html, body {
     height: auto !important;
     height: 100%;
     margin: 0 auto -95px;
+    padding-bottom: 95px;
 }
 .footer {
   bottom: 0;
