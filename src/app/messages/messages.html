@@ -1,10 +1,12 @@
 <ng-include src="'app/partials/signedInHeader.html'"></ng-include>
 
-<button class="btn btn-primary pull-right" ng-click="vm.new()">
-    New Message</button>
-<h3>My Messages</h3>
+<div class="container">
+    <div class="page-header">
+        <h1>My Messages</h1>
+    </div>
 
-<div class="col-sm-offset-2">
+    <button class="btn btn-primary pull-right" ng-click="vm.new()">New Message</button>
+
     <tabset id="messages-list">
         <tab heading="Inbox">
             <table class="table table-striped">

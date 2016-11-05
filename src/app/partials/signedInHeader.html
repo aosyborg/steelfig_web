@@ -1,38 +1,44 @@
 <div ng-controller="PartialCtrl">
-<header class="row">
-    <div class="col-md-2 pull-left">
-        <h1>
-            <button
-                 class="btn btn-default visible-xs-inline visible-sm-inline"
-                 ng-init="menuIsCollapsed=true"
-                 ng-click="menuIsCollapsed = !menuIsCollapsed">
-                <i class="fa fa-bars"></i>
-            </button>
-
-            <img id="logo"
-                src="/images/logo2.png"
-                class="visible-md-inline visible-lg-inline">
-            Steelfig
-        </h1>
-    </div>
-    <div class="pull-left">
-        <h3>Christmas Gift Exchange 2016</h3>
-    </div>
-
-    <div class="pull-right
-                text-right
-                col-md-3
-                btn-group
-                {{accountDropDownIsCollapsed ? '' : 'open'}}">
-        <div ng-click="accountDropDownIsCollapsed = !accountDropDownIsCollapsed">
-            <img ng-src="{{user.avatar}}" class="avatar" />
-            {{user.name}}
+    <nav class="navbar navbar-inverse navbar-fixed-top">
+        <div class="container">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle" ng-click="menuIsCollapsed = !menuIsCollapsed">
+                    <i class="fa fa-bars"></i>
+                </button>
+                <div class="navbar-brand">
+                    Steelfig
+                </div>
+            </div>
+            <div class="collapse navbar-collapse" collapse="menuIsCollapsed">
+                <ul class="nav navbar-nav">
+                    <li ng-click="go('/')">
+                        <a>Dashboard</a>
+                    </li>
+                    <li ng-click="go('/schedule')">
+                        <a>Schedule</a>
+                    </li>
+                    <li ng-click="go('/attendees')">
+                        <a>Who's Going</a>
+                    </li>
+                    <li ng-click="go('/messages')">
+                        <a>My Messages</a>
+                    </li>
+                    <li ng-click="go('/wishlist')">
+                        <a>My Wishlist</a>
+                    </li>
+                </ul>
+                <div class="navbar-right {{accountDropDownIsCollapsed ? '' : 'open'}}">
+                    <div ng-click="accountDropDownIsCollapsed = !accountDropDownIsCollapsed">
+                        <img ng-src="{{user.avatar}}" class="avatar" />
+                        <a>{{user.name}}</a>
+                    </div>
+                    <ul class="dropdown-menu">
+                        <li ng-click="logout()">
+                            <a>Sign Out</a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
         </div>
-        <ul class="dropdown-menu">
-            <li ng-click="logout()"><a href="#">Sign Out</a></li>
-        </ul>
-    </div>
-</header>
-
-<ng-include src="'app/partials/menu.html'"></ng-include>
+    </nav>
 </div>

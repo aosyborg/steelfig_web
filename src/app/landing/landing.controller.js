@@ -5,11 +5,13 @@
         .module('app')
         .controller('LandingCtrl', LandingController);
 
-    LandingController.$inject = ['$scope', '$modal', 'steelfigService'];
-    function LandingController ($scope, $modal, steelfig) {
+    LandingController.$inject = ['$scope', '$modal', '$location', 'steelfigService'];
+    function LandingController ($scope, $modal, $location, steelfig) {
         var vm = this;
         vm.myRSVP = {};
+        vm.attendees = [];
         vm.openRSVPModal = openRSVPModal;
+        vm.go = go;
 
         activate();
 
@@ -19,6 +21,10 @@
                     angular.forEach(attendees, function (attendee, accountId) {
                         if (accountId == $scope.account.id) {
                             vm.myRSVP = attendee;
+                        }
+
+                        if (attendee.status == 1) {
+                            vm.attendees.push(attendee);
                         }
                     });
                 });
@@ -36,5 +42,8 @@
             });
         }
 
+        function go (path) {
+            $location.path(path);
+        }
     }
 })();

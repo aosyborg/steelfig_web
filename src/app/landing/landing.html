@@ -1,51 +1,79 @@
 <ng-include src="'app/partials/signedInHeader.html'"></ng-include>
 
-<h3>Welcome</h3>
+<div class="container">
+    <div class="page-header">
+        <h1>
+            <img id="logo" src="/images/logo2.png">
+            Christmas Gift Exchange 2016
+        </h1>
+    </div>
 
-<div class="col-sm-offset-2">
-    <p>
-        Lots of updates made over last year! As always please let me know if you find a
-        bug and I'll do my best to fix it.
-    </p>
-    <p>
-        <strong>When:</strong> December 26th (Saturday) at 8:00 PM<br/>
-        <strong>Where:</strong> Jen &amp; Khangs house
-    </p>
-    <p>
-        In the mean time, please keep your RSVP up-to-date. Your RSVP:
-        <button class="btn btn-info"
-                ng-if="vm.myRSVP.status == 0"
-                ng-click="vm.openRSVPModal()">
-            <i class="glyphicon glyphicon-time"></i>
-            {{vm.myRSVP.status | rsvpResponse}}
-        </button>
-        <button class="btn btn-success"
-                ng-if="vm.myRSVP.status == 1"
-                ng-click="vm.openRSVPModal()">
-            <i class="glyphicon glyphicon-ok"></i>
-            {{vm.myRSVP.status | rsvpResponse}}
-        </button>
-        <button class="btn btn-danger"
-                ng-if="vm.myRSVP.status == 2"
-                ng-click="vm.openRSVPModal()">
-            <i class="glyphicon glyphicon-remove"></i>
-            {{vm.myRSVP.status | rsvpResponse}}
-        </button>
-    </p>
+    <div class="row">
+        <div class="col-md-4">
+            <h3>Who's Participating</h3>
+            <table class="table table-striped table-hover">
+                <tbody>
+                    <tr ng-repeat="attendee in vm.attendees">
+                        <td ng-if="attendee.accountId == account.id" ng-click="vm.go('/wishlist')">
+                            {{attendee.accountName}}
+                        </td>
+                        <td ng-if="attendee.accountId != account.id" ng-click="vm.go('/wishlist/' + attendee.attendeeId)">
+                            {{attendee.accountName}}
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+        <div class="col-md-4">
+            <h3>Updates</h3>
+            <p>
+                Lots of updates made over last year! As always please let me know if you find a
+                bug and I'll do my best to fix it.
+            </p>
+            <p>
+                <strong>When:</strong> TBD<br />
+                <strong>Where:</strong> TBD
+            </p>
+            <p>
+                In the mean time, please keep your RSVP up-to-date. Your RSVP:
+                <button class="btn btn-info"
+                        ng-if="vm.myRSVP.status == 0"
+                        ng-click="vm.openRSVPModal()">
+                    <i class="glyphicon glyphicon-time"></i>
+                    {{vm.myRSVP.status | rsvpResponse}}
+                </button>
+                <button class="btn btn-success"
+                        ng-if="vm.myRSVP.status == 1"
+                        ng-click="vm.openRSVPModal()">
+                    <i class="glyphicon glyphicon-ok"></i>
+                    {{vm.myRSVP.status | rsvpResponse}}
+                </button>
+                <button class="btn btn-danger"
+                        ng-if="vm.myRSVP.status == 2"
+                        ng-click="vm.openRSVPModal()">
+                    <i class="glyphicon glyphicon-remove"></i>
+                    {{vm.myRSVP.status | rsvpResponse}}
+                </button>
+            </p>
+        </div>
+        <div class="col-md-4">
+            <h3>FAQs</h3>
+            <p>
+                <strong>How/when are names going to be drawn?</strong>
+                November 22nd! Just before Thanksgiving.
+            </p>
+            <p>
+                <strong>Any wishlist requirements?</strong>
+                If you are participating, please add at least 5 items to your list but more is
+                always better. Also remember the limit is $80!
+            </p>
+            <p>
+                <strong>I want to participate together with my SO/mistresses.</strong>
+                Go to "Who's Going" and click the link icon of the person you want to merge with.
+                **Only your messages and wishlists will be merged! All other settings will be
+                surrendered in favor of the linked accounts settings.**
+            </p>
+        </div>
+    </div>
 
-    <h3>FAQs</h3>
-    <p>
-        <strong>How/when are names going to be drawn?</strong>
-        They have already been drawn! Check your email.
-    </p>
-    <p>
-        <strong>Any wishlist requirements?</strong>
-        If you are participating, please add at least 5 items to your list but more is
-        always better. Also remember the limit is $80!
-    </p>
-    <p>
-        <strong>I want to participate together with my SO/mistresses.</strong>
-        That sucks because names have already been drawn. They are welcome to come to the
-        party on the 26th and join in the fun next year!.
-    </p>
 </div>

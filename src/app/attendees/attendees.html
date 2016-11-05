@@ -1,37 +1,40 @@
 <ng-include src="'app/partials/signedInHeader.html'"></ng-include>
 
-<div ng-repeat="alert in vm.alerts">
-    <div class="col-sm-offset-2 alert alert-{{alert.type}}">
-        {{alert.msg}}
+<div class="container">
+    <div class="page-header">
+        <h1>
+            Who's Going
+            <button class="btn pull-right" ng-click="vm.settingsModal()">
+                <i class="fa fa-gear"></i> Settings</button>
+            <button class="btn btn-primary pull-right" ng-click="vm.newAttendeeModal()">
+                Send Invite</button>
+            <button class="btn btn-info pull-right"
+                    ng-if="vm.myRSVP.status == 0"
+                    ng-click="vm.openRSVPModal()">
+                <i class="glyphicon glyphicon-time"></i>
+                {{vm.myRSVP.status | rsvpResponse}}
+            </button>
+            <button class="btn btn-success pull-right"
+                    ng-if="vm.myRSVP.status == 1"
+                    ng-click="vm.openRSVPModal()">
+                <i class="glyphicon glyphicon-ok"></i>
+                {{vm.myRSVP.status | rsvpResponse}}
+            </button>
+            <button class="btn btn-danger pull-right"
+                    ng-if="vm.myRSVP.status == 2"
+                    ng-click="vm.openRSVPModal()">
+                <i class="glyphicon glyphicon-remove"></i>
+                {{vm.myRSVP.status | rsvpResponse}}
+            </button>
+        </h1>
     </div>
-</div>
 
-<button class="btn btn-primary pull-right" ng-click="vm.newAttendeeModal()">
-    Send Invite</button>
-<button class="btn btn-info pull-right"
-        ng-if="vm.myRSVP.status == 0"
-        ng-click="vm.openRSVPModal()">
-    <i class="glyphicon glyphicon-time"></i>
-    {{vm.myRSVP.status | rsvpResponse}}
-</button>
-<button class="btn btn-success pull-right"
-        ng-if="vm.myRSVP.status == 1"
-        ng-click="vm.openRSVPModal()">
-    <i class="glyphicon glyphicon-ok"></i>
-    {{vm.myRSVP.status | rsvpResponse}}
-</button>
-<button class="btn btn-danger pull-right"
-        ng-if="vm.myRSVP.status == 2"
-        ng-click="vm.openRSVPModal()">
-    <i class="glyphicon glyphicon-remove"></i>
-    {{vm.myRSVP.status | rsvpResponse}}
-</button>
+    <div ng-repeat="alert in vm.alerts">
+        <div class="col-sm-offset-2 alert alert-{{alert.type}}">
+            {{alert.msg}}
+        </div>
+    </div>
 
-<h3 class="col-sm-offset-2" >Who's Going</h3>
-<button class="btn" ng-click="vm.settingsModal()">
-    <i class="fa fa-gear"></i> Settings</button>
-
-<div class="col-sm-offset-2">
     <table class="table table-striped">
         <thead>
             <tr>
