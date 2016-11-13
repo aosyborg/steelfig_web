@@ -16,7 +16,7 @@
         </thead>
         <tbody>
             <tr ng-repeat="item in vm.items"
-                ng-class="{'strikeout': item.isPurchased == 1}">
+                ng-class="{'purchased-item': item.isPurchased == 1}">
                 <td ng-if="item.url">
                     <a href="{{item.url}}" target="_blank">{{item.name}}</a>
                 </td>
@@ -30,6 +30,8 @@
                        purchase this item. This cannot be undone."
                        btnlabel="Purchase"
                        ng-if="item.isPurchased == 0"></i>
+                    <i class="fa fa-check text-success"
+                       ng-if="item.isPurchased != 0"></i>
                 </td>
             </tr>
         </tbody>

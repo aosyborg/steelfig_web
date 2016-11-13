@@ -7,7 +7,7 @@
 
     PartialController.$inject = ['$scope', '$location'];
     function PartialController ($scope, $location) {
-        $scope.menuIsCollapsed = false;
+        $scope.menuIsCollapsed = true;
         $scope.accountDropDownIsCollapsed = true;
         $scope.go = function (path) {
             $location.path(path);
