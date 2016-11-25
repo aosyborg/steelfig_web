@@ -199,6 +199,6 @@ table {
     table-layout: auto;
     width: 100%;
 }
-.purchased-item {
+.purchased-item, .purchased-item a {
     color: #bbbbbb;
 }
